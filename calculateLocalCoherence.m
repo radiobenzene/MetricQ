@@ -11,13 +11,16 @@ function coherence = calculateLocalCoherence(patch)
     gy = gy(:);
     G = [gx, gy];
     
-    %Calculating SVD values
+    % Calculating SVD values
     svd_value = svd(G' * G);
+
+    % Specifying epsilon value
+    epsilon_val = 0.0000000005;
     
     s1 = svd_value(1);
     s2 = svd_value(2);
 
-    R = (s1 - s2) / (s1 + s2);
+    R = (s1 - s2) / (s1 + s2 + epsilon_val);
 
     coherence = R;
 end
